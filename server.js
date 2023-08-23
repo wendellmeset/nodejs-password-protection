@@ -15,3 +15,5 @@ res.sendFile(dir + "yes.html")
 })
 
 app.listen(process.env.PORT)
+
+// window.location.replace("new_page.html");
