@@ -1,0 +1,51 @@
+<html>
+<head>
+  <title>Project</title>
+  <link href="https://fonts.googleapis.com/css2?family=Passion+One&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-size: 48px;
+      font-family: 'Passion One', cursive;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <form id="licenseForm">
+    Please Enter Your Username and License Key<br>
+    <input name="username" id="username" required>
+    <input type="password" name="licenseKey" id="licenseKey" required>
+    <input type="submit" value="SUBMIT">
+  </form>
+  <script>
+    const ExpiredKeys = ["B", "A"];
+
+    document.getElementById("licenseForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      
+      const username = document.getElementById("username").value;
+      const licenseKey = document.getElementById("licenseKey").value;
+
+      if (ExpiredKeys.includes(licenseKey)) {
+        window.location.replace("expired");
+      } else {
+        // Generate the expected license key based on the provided code
+        var StudentUser = {company:username} 
+        var licenseData = {info:StudentUser, prodCode:"EEN850392", appVersion:"1.0"}
+        try {
+          var expectedLicenseKey = licenseKey.createLicense(licenseData);
+        } catch (err) {
+          console.log(err);
+          return;
+        }
+
+        if (licenseKey === expectedLicenseKey) {
+          window.location.replace("A647827bl24D");
+        } else {
+          location.reload(); // Refresh the page
+        }
+      }
+    });
+  </script>
+</body>
+</html>
